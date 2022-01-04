@@ -7,7 +7,8 @@ const authController = {
       const user = await userService.getUserByUsername(req.body.username);
       await userService.passwordMatch(user, req.body.password);
       const jwtToken = await userService.generateJwt(user);
-      return res.redirect(`/app?token=${jwtToken}`);
+      await userService.setToken(res, jwtToken);
+      return res.redirect(`/app`);
     } catch (err: any) {
       return res.render('login', {
         error: err.message,

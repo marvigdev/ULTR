@@ -8,15 +8,12 @@ const unauthenticatedOnly = async (
   res: Response,
   next: NextFunction
 ) => {
-  const authHeader = req.headers.authorization;
-  if (!authHeader) return next();
-  const authToken = authHeader.split(' ')[0];
+  const authToken = req.cookies.authToken;
 
-  verify(authToken, jwtSecret, (err, context) => {
-    if (!err) return res.redirect('/app');
+  verify(authToken, jwtSecret, (err: any, context: any) => {
+    if (context) return res.redirect('/app');
   });
 
-  req.context = {};
   next();
 };
 

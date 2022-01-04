@@ -8,16 +8,13 @@ const authenticatedOnly = async (
   res: Response,
   next: NextFunction
 ) => {
-  const authHeader = req.headers.authorization;
-  if (!authHeader) return res.redirect('/login?clear=true');
-  const authToken = authHeader.split(' ')[0];
-  if (!authToken) return res.redirect('/login?clear=true');
+  const authToken = req.cookies.authToken;
 
-  verify(authToken, jwtSecret, (err, context) => {
-    if (err || !context) return res.redirect('/login?clear=true');
+  verify(authToken, jwtSecret, (err: any, context: any) => {
+    if (err) return res.redirect('/login');
 
     req.context = {
-      name: context.name,
+      username: context.name,
       userId: context.userId,
     };
 

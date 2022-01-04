@@ -3,6 +3,7 @@ import { engine } from 'express-handlebars';
 const app = express();
 import AuthRouter from './routes/auth.router';
 import { initDb } from './services/db/initDb';
+import cookieParser from 'cookie-parser';
 
 app.engine(
   'hbs',
@@ -13,6 +14,7 @@ app.engine(
 );
 app.set('view engine', 'hbs');
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.use(AuthRouter);
 

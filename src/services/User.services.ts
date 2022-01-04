@@ -1,7 +1,9 @@
 import { User, UserI } from '../models/User.model';
 import { compare, hash } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
-const jwtSecret = 'supersecretyes';
+import { Response } from 'express';
+import { Document } from 'mongoose';
+import { jwtSecret } from '..';
 
 const userService = {
   getUserByUsername: async (username: string) => {
@@ -35,7 +37,7 @@ const userService = {
   },
 
   passwordMatch: async (user: UserI, password: string) => {
-    const doesMatch = compare(user.password, password);
+    const doesMatch = await compare(password, user.password);
     if (!doesMatch)
       throw new Error(
         'Your username or password is incorrect or was not found.'
@@ -44,8 +46,18 @@ const userService = {
   },
 
   generateJwt: async (user: UserI) => {
-    const jwt = sign(user, jwtSecret);
+    const jwt = sign(
+      {
+        username: user.username,
+        userId: user._id,
+      },
+      jwtSecret
+    );
     return jwt;
+  },
+
+  setToken: async (res: Response, token: string) => {
+    res.cookie('authToken', token);
   },
 };
 
