@@ -2,6 +2,7 @@ import express from 'express';
 import { engine } from 'express-handlebars';
 const app = express();
 import AuthRouter from './routes/auth.router';
+import { initDb } from './services/db/initDb';
 
 app.engine(
   'hbs',
@@ -17,7 +18,8 @@ app.use(AuthRouter);
 
 const PORT = 3000;
 app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
+  console.log(`Server listening on port ${PORT}.`);
+  initDb();
 });
 
 export const jwtSecret = 'secret';
