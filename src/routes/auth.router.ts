@@ -3,6 +3,8 @@ import { unauthenticatedOnly } from '../middlewares/unauthenticatedOnly';
 
 const router = Router();
 
-router.get('/login', unauthenticatedOnly, (req, res) => res.render('login'));
+router.use(unauthenticatedOnly);
+router.get('/login', (req, res) => res.render('login'));
+router.get('/register', (req, res) => res.render('register'));
 
 export default router;
