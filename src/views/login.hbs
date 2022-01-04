@@ -14,4 +14,8 @@
     </div>
     <button type='submit' class='btn btn-primary'>Login</button>
   </form>
+
+  {{#if error}}
+    <div class='alert alert-danger w-25'>{{error}}</div>
+  {{/if}}
 </div>
