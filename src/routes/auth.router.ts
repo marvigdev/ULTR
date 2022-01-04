@@ -8,7 +8,7 @@ const router = Router();
 router.use(unauthenticatedOnly);
 router.get('/login', renderView('login'));
 router.post('/login', authController.login);
-
 router.get('/register', renderView('register'));
+router.post('/register', authController.register);
 
 export default router;

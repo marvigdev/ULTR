@@ -6,13 +6,16 @@
   <form class='w-25' action='/login' method='post' enctype=''>
     <div class='mb-3'>
       <label class='form-label'>Username</label>
-      <input name='email' type='email' class='form-control' />
+      <input name='email' type='text' class='form-control' />
     </div>
     <div class='mb-3'>
       <label class='form-label'>Password</label>
       <input name='password' type='password' class='form-control' />
     </div>
-    <button type='submit' class='btn btn-primary'>Login</button>
+    <div class='d-flex align-items-center justify-content-between'>
+      <button type='submit' class='btn btn-primary'>Login</button>
+      <a href='/register'>Create an account</a>
+    </div>
   </form>
 
   {{#if error}}

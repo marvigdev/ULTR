@@ -3,10 +3,10 @@
 >
   <h1>Register</h1>
 
-  <form class='w-25' action='/login' method='post'>
+  <form class='w-25' action='/register' method='post'>
     <div class='mb-3'>
       <label class='form-label'>Username</label>
-      <input name='email' type='email' class='form-control' />
+      <input name='username' type='text' class='form-control' />
     </div>
     <div class='mb-3'>
       <label class='form-label'>Password</label>
@@ -14,8 +14,19 @@
     </div>
     <div class='mb-3'>
       <label class='form-label'>Confirm password</label>
-      <input name='password' type='password' class='form-control' />
+      <input name='confirmPassword' type='password' class='form-control' />
     </div>
-    <button type='submit' class='btn btn-primary'>Create account</button>
+    <div class='d-flex align-items-center justify-content-between'>
+      <button type='submit' class='btn btn-primary'>Create account</button>
+      <a href='/login'>I already have an account</a>
+    </div>
   </form>
+
+  {{#if error}}
+    <div class='alert alert-danger w-25'>{{error}}</div>
+  {{/if}}
+
+  {{#if message}}
+    <div class='alert alert-primary w-25'>{{message}}</div>
+  {{/if}}
 </div>

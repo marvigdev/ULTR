@@ -14,6 +14,20 @@ const authController = {
       });
     }
   },
+
+  register: async (req: Request, res: Response) => {
+    try {
+      const { username, password, confirmPassword } = req.body;
+      await userService.createUser(username, password, confirmPassword);
+      res.render('register', {
+        message: 'You created an account! You can login now.',
+      });
+    } catch (err: any) {
+      return res.render('register', {
+        error: err.message,
+      });
+    }
+  },
 };
 
 export { authController };
