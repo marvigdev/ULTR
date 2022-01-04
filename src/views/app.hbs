@@ -1,0 +1,65 @@
+<nav class='navbar navbar-expand-lg navbar-dark bg-primary'>
+  <div class='d-flex justify-content-around align-items-center container-fluid'>
+    <form class="m-0" action="/new" method="get">
+      <button type="submit" class='btn btn-secondary'>Add link</button>  
+    </form>
+    <h1 class='navbar-brand m-0' href='#'>Useful Links To Remember</h1>
+    <form class="m-0" action="/logout" method="post">
+      <button type="submit" class='btn btn-secondary'>Log Out</button>    
+    </form>
+  </div>
+</nav>
+
+<main class='m-auto'>
+  <section class="px-3 pt-3">
+    <form class="d-flex gap-2">
+      <input name='query' placeholder="Pesquisar (use #tag para pesquisar por tags)" type='text' class='form-control' />
+      <button type="submit" class="btn btn-primary">Pesquisar</button>
+    </form>
+  </section>
+
+  <a class='card m-3' target="_blank">
+    <div class='card-body'>
+      <h5 class='card-title'>fastify</h5>
+      <p class='card-text'>Fast and low overhead web framework, for Node.jsFast
+        and low overhead web framework, for Node.jsFast and low overhead web
+        framework, for Node.js</p>
+    </div>
+  </a>
+</main>
+
+<style>
+  .card { 
+    width: 300px;
+    transition: all 0.2s ease-in-out; 
+    text-decoration: none;
+    color: inherit; 
+    position: relative !important;
+  } 
+  
+  .card:hover { 
+    border-color: rgb(131, 131, 131); 
+    cursor: pointer; 
+  } 
+
+  main{
+    width: 75%
+  }
+  
+  @media(max-width: 768px){ 
+    .card { 
+      width: auto; 
+    } 
+    main{
+      width: auto;
+    }
+  }
+</style>
+
+<script
+  src='https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js'
+></script>
+<script>
+  const element = document.getElementsByTagName("main")[0]; const mansonry = new
+  Masonry(element, { itemSelector: '.card'})
+</script>
