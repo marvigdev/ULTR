@@ -4,6 +4,16 @@ import { userService } from '../services/User.services';
 import { authenticatedReq } from '../types/authenticatedRequest'
 
 const appController = {
+  showLinks: async (req: authenticatedReq, res: Response) => {
+    if(!req.body.query){
+      const userLinks = await linkService.getAllLinksByUser(req.context!.userId!);
+      console.log(userLinks)
+      return res.render("app", {
+        links: userLinks
+      })
+    }
+  },
+
   createLink: async (req: authenticatedReq, res: Response) => {
     try {
       console.log(req.context)

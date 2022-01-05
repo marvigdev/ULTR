@@ -18,6 +18,11 @@ const linkService = {
     });
 
     return newLink
+  },
+
+  getAllLinksByUser: async (username: string) => {
+    const links = await Link.find({owner: username}).lean();
+    return links
   }
 }
 export {linkService};
