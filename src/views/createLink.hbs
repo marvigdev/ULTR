@@ -1,0 +1,62 @@
+  <nav class='navbar navbar-expand-lg navbar-dark bg-primary'>
+  <div class='d-flex justify-content-around align-items-center container-fluid'>
+    <form class='m-0' action='/app' method='get'>
+      <button type='submit' class='btn btn-secondary btn-sm'>Go back</button>
+    </form>
+    <h1 class='navbar-brand m-0' href='#'>Useful Links to Remember</h1>
+    <div/>
+  </div>
+</nav>
+
+<main class="container-fluid mt-5 w-25 m-auto">
+  <div class="card w-100">
+    <div class="card-body">
+      <h5 class="card-title">Create a new link</h5>
+      <form action="/create" method="post">
+        <div class='mb-3'>
+          <label class='form-label'>The destination url</label>
+          <input
+            name='link'
+            type="url"
+            class='form-control'
+            placeholder="https://www.google.com"
+            required
+          />
+        </div>
+
+        <div class='mb-3'>
+          <label class='form-label'>Title</label>
+          <input
+            name='title'
+            class='form-control'
+            placeholder="Google Homepage"
+            required
+          />
+        </div>
+
+        <div class='mb-3'>
+          <label class='form-label'>Description</label>
+          <input
+            name='description'
+            class='form-control'
+            placeholder="Useful tool to search the internet"
+          />
+          <small class='form-text text-muted'>Field not required.</small>
+
+        </div>
+
+        <div class='mb-3'>
+          <label class='form-label'>Tags</label>
+          <input
+            name='tags'
+            class='form-control'
+            placeholder="search, tools, multipurpose"
+          />
+          <small class='form-text text-muted'>Tags are comma-separated.</small>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Create link</button>
+      </form>
+    </div>
+  </div>
+</main>

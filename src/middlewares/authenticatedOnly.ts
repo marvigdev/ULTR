@@ -14,7 +14,7 @@ const authenticatedOnly = async (
     if (err) return res.redirect('/login');
 
     req.context = {
-      username: context.name,
+      username: context.username,
       userId: context.userId,
     };
 

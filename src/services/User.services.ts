@@ -2,7 +2,6 @@ import { User, UserI } from '../models/User.model';
 import { compare, hash } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 import { Response } from 'express';
-import { Document } from 'mongoose';
 import { jwtSecret } from '..';
 
 const userService = {
@@ -31,7 +30,7 @@ const userService = {
       username,
       password: encryptedPassword,
     });
-    newUser.save();
+    await newUser.save();
 
     return newUser;
   },
