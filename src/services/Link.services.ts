@@ -1,4 +1,5 @@
-import { Link } from '../models/Link.model';
+import { FilterQuery } from 'mongoose';
+import { Link, LinkI } from '../models/Link.model';
 import { UserI } from '../models/User.model';
 
 const linkService = {
@@ -27,6 +28,12 @@ const linkService = {
 
   deleteLink: async (linkId: string) => {
     await Link.deleteOne({_id: linkId});
+  },
+
+  searchLinksByUser: async (query: FilterQuery<LinkI>) => {
+    const links = await Link.find(query).lean();
+    console.log(links)
+    return links
   }
 }
 export {linkService};
