@@ -4,6 +4,7 @@ import { userService } from '../services/User.services';
 const authController = {
   login: async (req: Request, res: Response) => {
     try {
+      console.log(req.body);
       const user = await userService.getUserByUsername(req.body.username);
       await userService.passwordMatch(user, req.body.password);
       const jwtToken = await userService.generateJwt(user);
