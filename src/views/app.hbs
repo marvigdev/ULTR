@@ -43,7 +43,7 @@
             {{#each this.tags}}
               <span class="badge bg-primary">{{this}}</span>
             {{/each}}
-            <button class="border-0 badge bg-light" onclick="deleteLink('1')">Delete this link</button>
+            <button class="border-0 badge bg-light" onclick="deleteLink('{{this._id}}')">Delete this link</button>
           </div>
         </div>
       </div>
@@ -101,6 +101,12 @@
 
   //Delete link logic
   function deleteLink(linkId){
-    confirm("Are you sure you want to delete this link?")
+    if(confirm("Are you sure you want to delete this link?")) {
+      fetch(`/delete?linkId=${linkId}`, {
+        method: 'DELETE'
+      }).then(() => {
+        location.reload(true);
+      })
+    }
   }
 </script>

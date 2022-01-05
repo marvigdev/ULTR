@@ -20,9 +20,13 @@ const linkService = {
     return newLink
   },
 
-  getAllLinksByUser: async (username: string) => {
-    const links = await Link.find({owner: username}).lean();
+  getAllLinksByUser: async (userId: string) => {
+    const links = await Link.find({owner: userId}).lean();
     return links
+  },
+
+  deleteLink: async (linkId: string) => {
+    await Link.deleteOne({_id: linkId});
   }
 }
 export {linkService};
