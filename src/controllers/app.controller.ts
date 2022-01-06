@@ -31,7 +31,6 @@ const appController = {
     })
     const stringTerms = terms.join(" ");
 
-    console.log(stringTerms)
     const filterQuery: FilterQuery<LinkI> = {
       $and: []
     }
