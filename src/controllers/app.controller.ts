@@ -34,7 +34,7 @@ const appController = {
     splittedQuery.forEach((value) => {
       const trimmed = value.trim();
       if (/#/.test(trimmed)) {
-        const removedHashtag = trimmed.substring(1);
+        const removedHashtag = trimmed.substring(1).toLowerCase();
         const replaceSpaces = removedHashtag.replaceAll(' ', '-');
         return tagList.push(replaceSpaces);
       }

@@ -7,7 +7,9 @@ async function createLink(
   data: { title: string; description: string; tags: string; link: string }
 ) {
   //If tag has multiple words, they must be separated by '-'
-  const tags = data.tags?.split(',').map((v) => v.trim().replaceAll(' ', '-'));
+  const tags = data.tags
+    ?.split(',')
+    .map((v) => v.trim().replaceAll(' ', '-').toLowerCase());
 
   const newLink = new Link({
     ...data,
