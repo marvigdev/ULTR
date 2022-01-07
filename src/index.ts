@@ -1,29 +1,35 @@
-import express from 'express';
+import * as dotenv from 'dotenv';
+import { join } from 'path';
+
+dotenv.config({ path: join(__dirname, '..', '.env') });
+
+import express, { Request, Response } from 'express';
 import { engine } from 'express-handlebars';
-const app = express();
 import AuthRouter from './routes/auth.router';
 import AppRouter from './routes/app.router';
-import { initDb } from './services/db/initDb';
 import cookieParser from 'cookie-parser';
+import { connectToDatabase } from './services/Database.service';
+
+const app = express();
+const PORT = process.env.PORT;
 
 app.engine(
   'hbs',
   engine({
     extname: 'hbs',
-    layoutsDir: `${__dirname}/views/layouts`,
+    layoutsDir: join(__dirname, 'views', 'layouts'),
   })
 );
 app.set('view engine', 'hbs');
+
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(AuthRouter);
 app.use(AppRouter);
+app.all('*', (_: Request, res: Response) => res.redirect('/app'));
 
-const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}.`);
-  initDb();
+  connectToDatabase();
 });
-
-export const jwtSecret = 'secret';

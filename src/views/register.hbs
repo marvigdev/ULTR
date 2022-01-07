@@ -1,19 +1,19 @@
 <main
-  class='container-fluid h-100 d-flex flex-column justify-content-center align-items-center'
+  class='h-100 d-flex flex-column justify-content-center align-items-center m-auto'
 >
   {{#if error}}
-    <div class='alert alert-danger w-25'>{{error}}</div>
+    <div class='alert alert-danger'>{{error}}</div>
   {{/if}}
 
   {{#if message}}
-    <div class='alert alert-primary w-25'>{{message}}</div>
+    <div class='alert alert-primary'>{{message}}</div>
   {{/if}}
 
-  <div class='card shadow' style='width: 25%'>
+  <div class='card shadow w-100'>
     <div class='card-body'>
       <h1 class='title'>Register</h1>
 
-      <form action='/register' method='post'>
+      <form action='/register' method='post' autocomplete="off">
         <div class='mb-3'>
           <label class='form-label'>Username</label>
           <input name='username' class='form-control' required />
@@ -46,3 +46,15 @@
 
   <a class='mt-3' href='/login'>I already have an account</a>
 </main>
+
+<style>
+main {
+  width: 25%;
+}
+
+@media(max-width: 992px) {
+  main {
+    width: 100%;
+  }
+}
+</style>

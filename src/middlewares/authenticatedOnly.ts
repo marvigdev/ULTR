@@ -1,7 +1,7 @@
 import { NextFunction, Response } from 'express';
 import { authenticatedReq } from '../types/authenticatedRequest';
-import { verify } from 'jsonwebtoken';
-import { jwtSecret } from '..';
+import { verifyJWT } from '../services/JWT.service';
+import { JWTContext } from '../types/JWTContext';
 
 const authenticatedOnly = async (
   req: authenticatedReq,
@@ -10,16 +10,17 @@ const authenticatedOnly = async (
 ) => {
   const authToken = req.cookies.authToken;
 
-  verify(authToken, jwtSecret, (err: any, context: any) => {
-    if (err) return res.redirect('/login');
-
+  try {
+    const decodedPayload = verifyJWT<JWTContext>(authToken);
     req.context = {
-      username: context.username,
-      userId: context.userId,
+      username: decodedPayload.username,
+      userId: decodedPayload.userId,
     };
+  } catch (err: any) {
+    return res.redirect('/login');
+  }
 
-    next();
-  });
+  next();
 };
 
 export { authenticatedOnly };

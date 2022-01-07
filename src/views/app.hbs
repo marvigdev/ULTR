@@ -1,17 +1,17 @@
 <nav class='navbar navbar-expand-lg navbar-dark bg-primary'>
   <div class='d-flex justify-content-around align-items-center container-fluid'>
-    <a href="/create">
-      <button type='submit' class='btn btn-secondary btn-sm'>Add link</button>
+    <a href='/create'>
+      <button class='btn btn-secondary btn-sm'>Add link</button>
     </a>
     <h1 class='navbar-brand m-0' href='#'>Useful Links to Remember</h1>
-    <form class='m-0' action='/logout' method='post'>
-      <button type='submit' class='btn btn-secondary btn-sm'>Log Out</button>
-    </form>
+    <a href='/logout'>
+      <button class='btn btn-secondary btn-sm'>Log Out</button>
+    </a>
   </div>
 </nav>
 
 <main class='d-flex flex-column m-auto p-3'>
-  <form class='d-flex gap-2' action="/app" method="get">
+  <form class='d-flex gap-2' action='/app' method='get'>
     <div class='w-100'>
       <input
         class='form-control'
@@ -30,20 +30,25 @@
     <button class='btn btn-primary' style='height: fit-content;'>Search</button>
   </form>
 
-  <section id="link-list">
+  <section id='link-list'>
     {{#each links}}
-      <div class="card m-1">
-        <div class="card-body">
-          <h5 class="card-title d-flex justify-content-between align-items-center">
-            <a href="{{this.link}}" target="_blank">{{this.title}}</a>       
+      <div class='card m-1'>
+        <div class='card-body'>
+          <h5
+            class='card-title d-flex justify-content-between align-items-center'
+          >
+            <a href='{{this.link}}' target='_blank'>{{this.title}}</a>
           </h5>
-          <p class="card-text">{{this.description}}</p>
+          <p class='card-text'>{{this.description}}</p>
 
-          <div class="d-flex flex-wrap gap-1">
+          <div class='d-flex flex-wrap gap-1'>
             {{#each this.tags}}
-              <span class="badge bg-primary">{{this}}</span>
+              <span class='badge bg-primary'>{{this}}</span>
             {{/each}}
-            <button class="border-0 badge bg-light" onclick="deleteLink('{{this._id}}')">Delete this link</button>
+            <button
+              class='border-0 badge bg-light'
+              onclick="deleteLink('{{this._id}}')"
+            >Delete this link</button>
           </div>
         </div>
       </div>
@@ -52,42 +57,29 @@
 </main>
 
 <style>
-  a {
-    text-decoration: none;
-  }
-
-  main{ 
-    width: 75%;
+  a { 
+    text-decoration: none; 
   } 
 
-  .card {
-    transition: all 0.2s ease-in-out;
-    width: 300px;
-    text-decoration: none;
-    color: inherit;
-    position: relative;
-  }
+  main{ 
+    width: 75%; 
+  } 
 
-  .card:hover .delete{
-    display: block;
-  }
-
-  .delete {
-    display: none;
-  }
-
-  .delete:hover {
-    cursor: pointer;
-  }
-
+  .card { 
+    transition: all 0.2s ease-in-out; 
+    min-width: 300px;
+    width: 24%;
+    text-decoration: none; 
+    color: inherit; 
+  } 
+  
   @media(max-width: 992px){ 
     main { 
       width: 100%; 
-    }
-
-    .card {
-      width: 100%;
-    }
+    } 
+    .card { 
+      width: 100%; 
+    } 
   }
 </style>
 
@@ -95,18 +87,14 @@
   src='https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js'
 ></script>
 <script>
-  //Masonry
+  //Masonry 
   const element = document.getElementById('link-list'); 
-  const msry = new Masonry(element, { itemSelector: '.card'})
-
-  //Delete link logic
-  function deleteLink(linkId){
-    if(confirm("Are you sure you want to delete this link?")) {
-      fetch(`/delete?linkId=${linkId}`, {
-        method: 'DELETE'
-      }).then(() => {
-        location.reload(true);
-      })
-    }
+  new Masonry(element, { itemSelector: '.card'}) 
+  
+  //Delete link logic function
+  function deleteLink(linkId){ 
+    if(confirm("Are you sure you want to delete this link?")){ 
+      window.open(`/delete?linkId=${linkId}`, '_self');
+    } 
   }
 </script>
