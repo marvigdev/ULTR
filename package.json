@@ -6,9 +6,12 @@
   "repository": "git@github.com:marvigdev/ULTR.git",
   "author": "Marcos Vinicius <hello@marvig.dev>",
   "license": "MIT",
+  "engines": {
+    "node": "16.8.0"
+  },
   "scripts": {
-    "copy:views": "yarn copyfiles -u 1 src/views/**/* dist/",
-    "build": "yarn tsc && yarn copy:views"
+    "start": "node dist/index.js",
+    "postinstall": "tsc && copyfiles -u 1 src/views/**/* dist/"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",

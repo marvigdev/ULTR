@@ -21,6 +21,7 @@ app.engine(
   })
 );
 app.set('view engine', 'hbs');
+app.set('views', join(__dirname, '..', 'src', 'views'));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
